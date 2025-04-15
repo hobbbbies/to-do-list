@@ -1,18 +1,33 @@
-export default class Projects {
-   constructor () {
-        this.projList = ["one", "two", "three"];
-   }
+import Project from "./project.js"
 
-   deletProj(project){
-          console.log(this.projList);
-          const index = this.projList.findIndex((element) => {
-               element == project;
+export default class ProjectList {
+   constructor () {
+        this._projList = [new Project("Default")];
+        this._currProj = this._projList[0];
+     }
+
+     set currProj(name){
+          this._currProj = this.retrieveProj(name);
+     }
+     get currProj(){
+          return this._currProj;
+     }
+     retrieveProj(name){
+          const proj = this._projList.find((element) => {
+               return element.name == name;
           })
-          console.log(this.projList);
-          return this.projList.splice(1, index, project);
-   }
-   addProj(project){
-          return this.projList.push(project);
-   }
+          return proj;
+     }
+     deletProj(proj){
+          const index = this._projList.findIndex((element) => {
+               return element == proj ;
+          })
+
+          return this._projList.splice(1, index, proj); 
+     }
+     addProj(name){
+          const newProj = new project(name);
+          return this._projList.push(newProj);
+    x}
 
 }

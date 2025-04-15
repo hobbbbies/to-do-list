@@ -1,4 +1,4 @@
-import Projects from "./projectList.js";
+import ProjectList from "./projectList.js";
 
-const yo = new Projects();
-yo.deletProj();
+const myProjects = new ProjectList();
+
