@@ -12,6 +12,10 @@ export default class ProjectList {
      get currProj(){
           return this._currProj;
      }
+     get projList(){
+          return this._projList;
+     }
+
      retrieveProj(name){
           const proj = this._projList.find((element) => {
                return element.name == name;
@@ -26,7 +30,7 @@ export default class ProjectList {
           return this._projList.splice(1, index, proj); 
      }
      addProj(name){
-          const newProj = new project(name);
+          const newProj = new Project(name);
           return this._projList.push(newProj);
     x}
 

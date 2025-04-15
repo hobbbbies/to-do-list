@@ -14,6 +14,10 @@ export default class Project {
         return this._name;
     }
 
+    get toDoList() {
+        return this._toDoList;
+    }
+
     deleteToDo(toDoItem) {
         const index = this.toDoList.findIndex((element) => {
             return element == toDoItem ;

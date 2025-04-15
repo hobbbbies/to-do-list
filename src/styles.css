@@ -4,7 +4,27 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
+li {
+    list-style: none;
+}
+
 .main-container {
     width: 100%;
-    border: 1px solid red;
+    height: 100%;
+    border: 2px solid red;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: stretch;
+}
+
+.project-sidebar {
+    border: 2px solid blue;
+}
+
+.main-panel {
+    border: 2px solid green;
 }

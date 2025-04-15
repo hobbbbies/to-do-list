@@ -6,4 +6,7 @@ export default class createToDo {
         this._dics = disc;
     }
 
+    get name(){
+        return this._name;
+    }
 }
