@@ -4,21 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List - Stefan Vitanov</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="main-container">
         <div class="project-sidebar">
-            <h1>Your Projects</h1>
+            <header class="panel-header">
+                <h1>Your Projects</h1>
+                <button id="add-proj" class="add">+</button>
+            </header>
             <ul class="project-list">
             </ul>
         </div>
         <div class="main-panel">
-            <h1>TO DO - [Project name]</h1>
+            <header class="panel-header">
+                <h1 class="task-header">TO DO - [Project name]</h1>
+                <button id="add-task" class="add">+</button>
+            </header>
             <h2>Upcoming</h2>
             <container class="upcoming-list"></container>
             <h2>Remaining</h2>
             <ul class="remaining-list"></ul>
         </div>
     </div>
+    
+    <dialog id="task-dialog">
+        <form class="form">
+            <label for="name">Name: </label>
+            <input id="name" name="name">
+
+            <label for="priority">Priority: </label>
+            <select id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="moderate">Moderate</option>
+                <option value="high">High</option>
+            </select>
+
+            <label for="date">Date: </label>
+            <input type="date" id="date" name="date">
+            
+            <label for="disc">Description: </label>
+            <input id="disc" name="disc">
+
+            <button class="submit-btn" type="submit">Add Task</button>
+        </form>
+    </dialog>
+
+    <dialog id="project-dialog">
+        <form class="form">
+            <label for="project-name"></label>
+            <input id="project-name" name="projectName">
+
+            <button class="submit-btn" type="submit">Add Project</button>
+        </form>
+    </dialog>
 </body>
 </html>

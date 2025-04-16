@@ -15,7 +15,6 @@ export default class ProjectList {
      get projList(){
           return this._projList;
      }
-
      retrieveProj(name){
           const proj = this._projList.find((element) => {
                return element.name == name;

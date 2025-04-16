@@ -6,25 +6,180 @@
 
 html, body {
     height: 100%;
+    font-family: "Quicksand", sans-serif;
+
 }
+
+.poetsen-one-regular {
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+}
+  
 
 li {
     list-style: none;
 }
 
+h2 {
+    margin: 20px;
+    border-bottom: 3px solid black
+}
+
 .main-container {
-    width: 100%;
-    height: 100%;
-    border: 2px solid red;
+    margin: 32px;
+    max-width: 100%;
+    min-height: 90%;
+    max-height: 100%;
     display: grid;
     grid-template-columns: 1fr 4fr;
     align-items: stretch;
 }
 
+.panel-header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background-color: lightcoral;
+    height: 100px;
+}
+
+.panel-header > * {
+    margin-left: 40px;
+}
+
+.main-panel > .panel-header {
+    box-shadow: 10px 5px 10px black;
+} 
+
+.project-sidebar > .panel-header{
+    border-right:  2px solid rgb(0, 0, 0);
+    box-shadow: 10px 5px 10px black;
+}
+
+.add {
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 50px;
+    margin: 8px;
+    background-color: #f8f8f8;
+
+}
+
+.add:hover {
+    transition: all 0.5s ease;
+    background-color: #a59f9f;
+}
+
 .project-sidebar {
-    border: 2px solid blue;
+    border-radius: 12px;
+    background-color: #f8f8f8;
 }
 
 .main-panel {
-    border: 2px solid green;
+    border-radius: 12px;
+    background-color: white
+}
+
+.upcoming-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.to-do-item-box {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+
+    background-color: rgb(219, 178, 108);
+    border-radius: 16px;
+    background-color: #e5e5e5;
+
+}
+
+.complete-btn {
+    aspect-ratio: 1 / 1;
+    justify-self: center;
+    width: 50px;
+    border-radius: 50%;
+    background-color: lightcoral;
+}
+
+.to-do-item {
+    flex: 1;
+
+    margin: 8px;
+    padding: 8px;
+    
+    display: grid;
+    
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.to-do-field {
+    background-color: white;
+    padding: 8px;
+    border-radius: 16px;
+}
+
+dialog {
+    justify-self: center;
+    align-self: center;
+    padding: 16px;
+}
+
+.proj-button {
+    width: 200px;
+    padding: 8px;
+    border-radius: 12px;
+    background-color: #e5e5e583;
+    transition: all 0.5s ease;
+    margin-bottom: 6px;
+}
+
+.proj-button:hover {
+    background-color: #a59f9f;
+
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+
+}
+
+a {
+    position: relative;
+    background-color: lightcoral;
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    max-width: 40px;
+    margin-left: 16px;    
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all .5s ease;
+}
+
+a:hover {
+    font-size: 1.5em;
+    max-width: 50px;
+    margin-left: 10px;
 }

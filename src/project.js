@@ -20,13 +20,22 @@ export default class Project {
 
     deleteToDo(toDoItem) {
         const index = this.toDoList.findIndex((element) => {
-            return element == toDoItem ;
+            return element === toDoItem ;
        })
-       return this.toDoList.splice(1, index, toDoItem); 
+       console.log("Removing element");
+       this.toDoList.splice(index, 1); 
     }
-    addToDo(name, date, prio, disc) {
-        const toDo = new toDoItem(name, date, prio, disc);
-        console.log(toDo);
-        return this._toDoList.push(toDo);
+    addToDo(name, priority, date, disc) {
+        const toDo = new toDoItem(name, priority, date, disc);
+        
+        for(let i = 0; i < this._toDoList.length; i++) {
+            if(toDo.dueDate <= this._toDoList[i].dueDate) {
+                this._toDoList.splice(i, 0, toDo);
+                return;
+            }
+        }
+
+        // Triggers if it's the oldest date 
+        this._toDoList.push(toDo);
     }
 }
