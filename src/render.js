@@ -1,5 +1,5 @@
-export default function render(ProjectList) {
 
+export default function render(ProjectList) {
     /*
         All the dom elements we need for  rendering the popup modal
     */
@@ -53,6 +53,7 @@ export default function render(ProjectList) {
     submitProjButton.addEventListener('click', (event) =>{
         const name = submitModal(event, projectForm)[0];
         ProjectList.addProj(name);
+        localStorage.setItem("myProjects", JSON.stringify(ProjectList));
         projectDialog.close();
         renderProjects();
     });
@@ -60,6 +61,7 @@ export default function render(ProjectList) {
     submitTaskBtn.addEventListener('click', (event) =>{
         const arr = submitModal(event, taskForm);
         currProj.addToDo(arr[0], arr[1], arr[2], arr[3]);
+        localStorage.setItem("myProjects", JSON.stringify(ProjectList));
         taskDialog.close();
         renderToDo();
      });
@@ -97,30 +99,34 @@ export default function render(ProjectList) {
     
     //Render Selected project's to do list
     const renderToDo = () => {
-        const upcoming = document.querySelector(".upcoming-list");
-        const remaining = document.querySelector(".remaining-list");
-        const taskHeader = document.querySelector(".task-header");
-        taskHeader.textContent = `TO DO - ${currProj.name}`
+        const upcoming = document.querySelector("#upcoming-list");
+        const remaining = document.querySelector("#remaining-list");
+        const missed = document.querySelector("#missed-list")
+        const taskHeading = document.querySelector("#task-heading");
+        taskHeading.textContent = `TO DO - ${currProj.name}`
 
+        // Clears previous render
         upcoming.textContent = "";
         remaining.textContent = "";
+        missed.textContent = "";
 
-        const container = document.querySelector(".upcoming-list");
-
+        // Displays every task in order of date
         currProjList.forEach((toDoItem) => {
             const boxToAdd = document.createElement("div");
             boxToAdd.classList.add("to-do-item-box");
 
             const completeBtn = document.createElement("a");
-            const btnSpan = document.createElement("span");
-            completeBtn.classList.add("btn", "btn-swipe-left", "btn-swipe-left--red");
+            const btnIcon = document.createElement("i");
             completeBtn.setAttribute("href", "#");
-            btnSpan.textContent = "X";
+            btnIcon.classList.add("fa-solid", "fa-check");
+
             completeBtn.addEventListener('click', () => {
                 currProj.deleteToDo(toDoItem);
+                localStorage.setItem("myProjects", JSON.stringify(ProjectList))
                 renderToDo();
             });
-            completeBtn.append(btnSpan);
+
+            completeBtn.append(btnIcon);
 
             const nameDiv = document.createElement("div");
             nameDiv.textContent = `Name: ${toDoItem.name}`;
@@ -138,10 +144,39 @@ export default function render(ProjectList) {
             itemToAdd.classList.add("to-do-item");
             itemToAdd.append(nameDiv, priorityDiv, dueDateDiv, discDiv);
 
-            for(let i = 0; i < itemToAdd.childNodes.length; i++) {itemToAdd.childNodes[i].classList.add("to-do-field", "quicksand")};   
+            for(let i = 0; i < itemToAdd.childNodes.length; i++) {itemToAdd.childNodes[i].classList.add("to-do-field", "quicksand")};  
+            
+            const editBtn = document.createElement("a");
+            const editIcon = document.createElement('i');
+            editIcon.classList.add("fa-solid", "fa-pencil");
+            editBtn.append(editIcon);
 
-            boxToAdd.append(completeBtn, itemToAdd);
-            container.append(boxToAdd);
+            editBtn.addEventListener('click', () => {
+                currProj.deleteToDo(toDoItem);
+                localStorage.setItem("myProjects", JSON.stringify(ProjectList))
+
+                taskDialog.showModal();
+            });
+
+            boxToAdd.append(completeBtn, itemToAdd, editBtn);
+
+            const itemDate = Date.parse(toDoItem.dueDate);
+            const currentDate = new Date().getTime();
+            const timeDiff = ((itemDate - currentDate) / 1000 / 60 / 60 / 24);
+
+            /* 
+                Checks if the task due date is within this week, or if its missed, and assings it to corresponding containerq
+            */
+            if((timeDiff <= 7 && timeDiff >= 0)) {
+                upcoming.append(boxToAdd);
+            }
+            else if (timeDiff < 0){
+                missed.append(boxToAdd);
+                dueDateDiv.style.color = "red";
+            }
+            else {
+                remaining.append(boxToAdd);
+            }
         })
     }
     renderProjects();

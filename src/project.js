@@ -1,9 +1,9 @@
-import toDoItem from "./createToDo.js";
+import toDoItem from "./toDoTask.js";
 
 export default class Project {
-    constructor(name){
+    constructor(name, toDoList = []){
         this._name = name;
-        this._toDoList = [];
+        this._toDoList = toDoList;
     } 
 
     set name(name){
@@ -18,12 +18,15 @@ export default class Project {
         return this._toDoList;
     }
 
+    set toDoList(arr) {
+        this._toDoList = arr;
+    }
+
     deleteToDo(toDoItem) {
-        const index = this.toDoList.findIndex((element) => {
+        const index = this._toDoList.findIndex((element) => {
             return element === toDoItem ;
        })
-       console.log("Removing element");
-       this.toDoList.splice(index, 1); 
+       this._toDoList.splice(index, 1); 
     }
     addToDo(name, priority, date, disc) {
         const toDo = new toDoItem(name, priority, date, disc);
@@ -37,5 +40,9 @@ export default class Project {
 
         // Triggers if it's the oldest date 
         this._toDoList.push(toDo);
+    }
+
+    static fromJSON(obj) {
+        return new Project(obj._name, obj._toDoList);
     }
 }

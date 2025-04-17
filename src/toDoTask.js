@@ -1,4 +1,4 @@
-export default class createToDo {
+export default class toDoTask {
     constructor(name, priority, dueDate, disc) {
         this._name = name;
         this._priority = priority;
@@ -20,5 +20,9 @@ export default class createToDo {
       
     get disc() {
         return this._disc;
+    }
+
+    static fromJSON(obj) {
+        return new toDoTask(obj._name, obj._priority, obj._dueDate, obj._disc);
     }
 }

@@ -1,8 +1,8 @@
 import Project from "./project.js"
 
 export default class ProjectList {
-   constructor () {
-        this._projList = [new Project("Default")];
+   constructor (projectList = [new Project("Default")]) {
+        this._projList = projectList;
         this._currProj = this._projList[0];
      }
 
@@ -14,6 +14,9 @@ export default class ProjectList {
      }
      get projList(){
           return this._projList;
+     }
+     set projList(arr){
+          this._projList = arr;
      }
      retrieveProj(name){
           const proj = this._projList.find((element) => {
