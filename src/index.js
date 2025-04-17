@@ -6,7 +6,7 @@ import storageAvailable from "./localStorage.js";
 
 import "./styles.css";
 
-let myProjects;
+let myProjects = new ProjectList();
 if (storageAvailable("localStorage")) {
     if(localStorage.getItem("myProjects")) {
         const projectLiteral = JSON.parse(localStorage.getItem("myProjects"));
